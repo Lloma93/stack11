@@ -3,6 +3,7 @@ const connection = require("../database/connection");
 
 module.exports = {
     async index(request, response){
+        console.log(response)
         const ongs = await connection("ongs").select("*");
         return response.json(ongs);
     },
@@ -11,12 +12,12 @@ module.exports = {
         const { name, email, whatsapp, city, uf } = request.body;
         const id = crypto.randomBytes(4).toString("HEX");
         await connection("ongs").insert({
-        id,
-        name,
-        email,
-        whatsapp,
-        city,
-        uf
+            id,
+            name,
+            email,
+            whatsapp,
+            city,
+            uf
         });
         return response.json({ id });
     }
